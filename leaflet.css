@@ -1,0 +1,88 @@
+
+#leftbox {
+    float:left;
+    background:white;
+    width:20%;
+    height:600px;
+}
+#layer-switcher {
+    /* position: absolute; */
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#map {
+    float:left;
+    background:white;
+    width:60%;
+    height:600px;
+}
+#rightbox {
+    float:right;
+    background:white;
+    width:20%;
+    height:600px;
+}
+
+/* #leaflet-control-search {
+    position: absolute;
+    top: 10;
+    left: 10;
+    bottom: 0;
+    width: 100%;
+    margin: 2px;
+  } */
+
+#search {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+}
+
+#search-btn {
+    position: absolute;
+    top: 40px;
+    left: 100px;
+}
+
+#MouzaDropdown {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+}
+
+h1{
+    color:black;
+    text-align:center;
+}
+h2{
+    color:black;
+    text-align:center;
+}
+h3{
+    color:black;
+    text-align:center;
+}
+
+/* css to customize Leaflet default styles  */
+/* .popupCustom .leaflet-popup-tip, */
+/* .popupCustom{ */
+    /* border: #800080; */
+    /* background: #FFFFF0; */
+    /* color: #800080; */
+/* /} */
+
+/* .map-popup{ */
+    /* background: #FFFFF0;
+    color: #800080; */
+    /* border-style: solid;
+    width: 100%;
+    border: 1px solid;
+    text-align: left;
+    background-color: #dcdcdc;
+    text-decoration: #800080;
+    border-color: #800080; */
+/* } */
