@@ -214,7 +214,8 @@ function handleJson(data) {
           );
         layer.bindPopup(popupContent);
       }
-    }).addTo(map);
+    });
+    wfsLayers.addTo(map);
   map.fitBounds(wfsLayers.getBounds());
 //leaflet layer control START
 var baseMaps = {
@@ -228,7 +229,7 @@ var LayerControl = L.control.layers(baseMaps, overlayMaps);
 LayerControl.addTo(map);
 //leaflet layer control END
 
-//Layer Switcher on Sidebar
+//Layer Switcher on left DIV
 const layerSwitcher = L.control.layers();
 layerSwitcher.onAdd = function() {
     const div = L.DomUtil.create('div', 'layer-switcher');
@@ -275,4 +276,3 @@ document.getElementById('wfsLayers').addEventListener('change', function() {
 });
 
 }
-
