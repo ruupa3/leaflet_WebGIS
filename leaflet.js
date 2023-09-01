@@ -160,7 +160,7 @@ function handleJson(data) {
         onEachFeature: function(feature, layer) { 
                                                           /////////////////////////////////////////////
             //  layer.on('click', function (e) {
-              // var uniq = feature.properties.unique_id;
+              //var uniq = feature.properties.u_plot_no;
               //var url = '';
               //var d = [];
            
@@ -183,36 +183,75 @@ function handleJson(data) {
             //   }
 
             //  });
-                                                        //////////////////////////////////////////////
-          var popupContent = L.popup({
-            'maxWidth': '400',
-            'width': '200',
-            'closeButton': 'true',
-            // 'className': 'map-popup',
+            var uniq = feature.properties.u_plot_no;
+            $.ajax({
+              type: "GET",
+              url: 'leaflet.php',
+              //action : '',
+              data: {uniq: uniq},
+              success: function(popupContent)
+              {
+                var popupContent = L.popup({
+                  'maxWidth': '400',
+                  'width': '200',
+                  'closeButton': 'true',
+                  // 'className': 'map-popup',
+                })
+                // .setContent("<table>"+
+                //   "<tr>"+"<td colspan = 2>"+"<center>"+"<b>"+"--PLOT INFORMATION--"+"</b>"+"</center>"+"</td>"+"</tr>"+
+                //   "<tr>"+"<td colspan = 2>"+"<center>"+"------"+"</center>"+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Unique Plot No:"+"</b>"+"</td>"+"<td>"+feature.properties.u_plot_no+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Plot No:"+"</b>"+"</td>"+"<td>"+feature.properties.plot_num+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"JL No:"+"</b>"+"</td>"+"<td>"+feature.properties.jl_no+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Land Type ID:"+"</b>"+"</td>"+"<td>"+feature.properties.landt_id+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Mouza Name:"+"</b>"+"</td>"+"<td>"+feature.properties.mouza_name+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Owner Name:"+"</b>"+"</td>"+"<td>"+feature.properties.owner_name+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Khatian No:"+"</b>"+"</td>"+"<td>"+feature.properties.khatian_no+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Shared Area:"+"</b>"+"</td>"+"<td>"+feature.properties.share_area+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Land Shared:"+"</b>"+"</td>"+"<td>"+feature.properties.land_share+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Khatian Area Possessed:"+"</b>"+"</td>"+"<td>"+feature.properties.area_possd+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Acquisition ID:"+"</b>"+"</td>"+"<td>"+feature.properties.acq_id+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Land Use ID:"+"</b>"+"</td>"+"<td>"+feature.properties.land_use_id+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Present Land Use:"+"</b>"+"</td>"+"<td>"+feature.properties.present_land_use+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Possession Status:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_is_full+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Possession Reference No:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_ref_no+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Possession Date:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_dt+"</td>"+"</tr>"+
+                //   "<tr>"+"<td>"+"<b>"+"Plot Area Possessed:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_area+"</td>"+"</tr>"+
+                // "</table>"
+                // );
+              layer.bindPopup(popupContent);
+              }
           })
-          .setContent("<table>"+
-            "<tr>"+"<td colspan = 2>"+"<center>"+"<b>"+"--PLOT INFORMATION--"+"</b>"+"</center>"+"</td>"+"</tr>"+
-            "<tr>"+"<td colspan = 2>"+"<center>"+"------"+"</center>"+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Unique Plot No:"+"</b>"+"</td>"+"<td>"+feature.properties.u_plot_no+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Plot No:"+"</b>"+"</td>"+"<td>"+feature.properties.plot_num+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"JL No:"+"</b>"+"</td>"+"<td>"+feature.properties.jl_no+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Land Type ID:"+"</b>"+"</td>"+"<td>"+feature.properties.landt_id+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Mouza Name:"+"</b>"+"</td>"+"<td>"+feature.properties.mouza_name+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Owner Name:"+"</b>"+"</td>"+"<td>"+feature.properties.owner_name+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Khatian No:"+"</b>"+"</td>"+"<td>"+feature.properties.khatian_no+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Shared Area:"+"</b>"+"</td>"+"<td>"+feature.properties.share_area+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Land Shared:"+"</b>"+"</td>"+"<td>"+feature.properties.land_share+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Khatian Area Possessed:"+"</b>"+"</td>"+"<td>"+feature.properties.area_possd+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Acquisition ID:"+"</b>"+"</td>"+"<td>"+feature.properties.acq_id+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Land Use ID:"+"</b>"+"</td>"+"<td>"+feature.properties.land_use_id+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Present Land Use:"+"</b>"+"</td>"+"<td>"+feature.properties.present_land_use+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Possession Status:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_is_full+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Possession Reference No:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_ref_no+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Possession Date:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_dt+"</td>"+"</tr>"+
-            "<tr>"+"<td>"+"<b>"+"Plot Area Possessed:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_area+"</td>"+"</tr>"+
-          "</table>"
-          );
-        layer.bindPopup(popupContent);
+                                                        //////////////////////////////////////////////
+        //   var popupContent = L.popup({
+        //     'maxWidth': '400',
+        //     'width': '200',
+        //     'closeButton': 'true',
+        //     // 'className': 'map-popup',
+        //   })
+        //   .setContent("<table>"+
+        //     "<tr>"+"<td colspan = 2>"+"<center>"+"<b>"+"--PLOT INFORMATION--"+"</b>"+"</center>"+"</td>"+"</tr>"+
+        //     "<tr>"+"<td colspan = 2>"+"<center>"+"------"+"</center>"+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Unique Plot No:"+"</b>"+"</td>"+"<td>"+feature.properties.u_plot_no+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Plot No:"+"</b>"+"</td>"+"<td>"+feature.properties.plot_num+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"JL No:"+"</b>"+"</td>"+"<td>"+feature.properties.jl_no+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Land Type ID:"+"</b>"+"</td>"+"<td>"+feature.properties.landt_id+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Mouza Name:"+"</b>"+"</td>"+"<td>"+feature.properties.mouza_name+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Owner Name:"+"</b>"+"</td>"+"<td>"+feature.properties.owner_name+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Khatian No:"+"</b>"+"</td>"+"<td>"+feature.properties.khatian_no+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Shared Area:"+"</b>"+"</td>"+"<td>"+feature.properties.share_area+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Land Shared:"+"</b>"+"</td>"+"<td>"+feature.properties.land_share+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Khatian Area Possessed:"+"</b>"+"</td>"+"<td>"+feature.properties.area_possd+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Acquisition ID:"+"</b>"+"</td>"+"<td>"+feature.properties.acq_id+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Land Use ID:"+"</b>"+"</td>"+"<td>"+feature.properties.land_use_id+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Present Land Use:"+"</b>"+"</td>"+"<td>"+feature.properties.present_land_use+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Possession Status:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_is_full+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Possession Reference No:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_ref_no+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Possession Date:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_dt+"</td>"+"</tr>"+
+        //     "<tr>"+"<td>"+"<b>"+"Plot Area Possessed:"+"</b>"+"</td>"+"<td>"+feature.properties.poss_area+"</td>"+"</tr>"+
+        //   "</table>"
+        //   );
+        // layer.bindPopup(popupContent);
       }
     });
     wfsLayers.addTo(map);
