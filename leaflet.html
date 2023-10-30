@@ -21,10 +21,6 @@
     
     <!--Leaflet geocoder plugin JS-->
     <script src = "https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    
-
-    <!--Leaflet Geoserver request link-->
-    <!-- <script src="lib/L.Geoserver.js"></script> -->
 
     <!--BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -43,36 +39,22 @@
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            <img src="/assets/fontawesome-free-6.4.2-desktop/svgs/solid/cubes-stacked.svg" 
-            alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            COALRR WebGIS
+            COALRR Geographical Information System
           </a>
         </div>
       </nav>
 
-    <div class = "container" id = "boxes">
+      <div class = "flex-parent-element" id = "boxes">
         <!--<h1 style = "height:50px; text-align:middle">COALRR WebGIS</h1>-->
          
-        <div id = "leftbox" style = "background-color: powderblue">
-                <!--<div class = "leaflet-control search">
-                    <input type="text" id="search" placeholder="Lat, Lng"><br>
-                    <button id="search-btn">Search</button>
-                </div>-->
-                <div id="layer-switcher" class="leaflet-control" style="width:50%; margin:0 auto">
-                    <input type="checkbox" id="osm" checked>
-                    <label for="osm">Open Street Map</label><br>
-                    <input type="checkbox" id="wmsLayers">
-                    <label for="wmsLayers">WMS layers</label><br>
-                    <input type="checkbox" id="wfsLayers">
-                    <label for="wfsLayers">WFS layers</label>
-                </div>
+        <!-- <div id = "leftbox" style = "background-color: powderblue">
+        </div> -->
+         
+        <div class='flex-child-element' id="map" style="background-color: powderblue">
         </div>
          
-        <div id="map" style="background-color: powderblue">
-        </div>
-         
-        <div id="rightbox" style="background-color: powderblue">
-        </div>
+        <!-- <div id="rightbox" style="background-color: powderblue">
+        </div> -->
     </div>
 
     <!-- Coordinate DIV -->
