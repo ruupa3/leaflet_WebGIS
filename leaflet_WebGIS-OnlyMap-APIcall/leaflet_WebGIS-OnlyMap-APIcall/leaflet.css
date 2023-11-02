@@ -1,0 +1,91 @@
+
+/* #leftbox {
+    float:left;
+    background:white;
+    width:20%;
+    height:600px;
+} */
+/* #layer-switcher {
+    position: absolute;
+    width:200%;
+    margin:0 auto;
+    top: 60px;
+    left: 60px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+#map {
+    float:left;
+    background:powderblue;
+    width: 100%;
+    height:600px;
+}
+/* #rightbox {
+    float:right;
+    background:white;
+    width:20%;
+    height:600px;
+} */
+/* #leaflet-control-search {
+    position: absolute;
+    top: 10;
+    left: 10;
+    bottom: 0;
+    width: 100%;
+    margin: 2px;
+  } */
+#search {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+}
+#search-btn {
+    position: absolute;
+    top: 40px;
+    left: 100px;
+}
+#MouzaDropdown {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+}
+h1{
+    color:black;
+    text-align:center;
+}
+h2{
+    color:black;
+    text-align:center;
+}
+h3{
+    color:black;
+    text-align:center;
+}
+
+table, tr, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table.khatian_table tr{
+    border:1px solid #00000063;
+}
+/* css to customize Leaflet default styles  */
+/* .popupCustom .leaflet-popup-tip, */
+/* .popupCustom{ */
+    /* border: #800080; */
+    /* background: #FFFFF0; */
+    /* color: #800080; */
+/* /} */
+/* .map-popup{ */
+    /* background: #FFFFF0;
+    color: #800080; */
+    /* border-style: solid;
+    width: 100%;
+    border: 1px solid;
+    text-align: left;
+    background-color: #dcdcdc;
+    text-decoration: #800080;
+    border-color: #800080; */
+/* } */
