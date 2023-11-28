@@ -21,14 +21,11 @@
     
     <!--Leaflet geocoder plugin JS-->
     <script src = "https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-    
-
-    <!--Leaflet Geoserver request link-->
-    <!-- <script src="lib/L.Geoserver.js"></script> -->
 
     <!--BOOTSTRAP-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
@@ -41,46 +38,87 @@
 <body>
     <!--Bootstrap Navbar-->
     <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="/assets/fontawesome-free-6.4.2-desktop/svgs/solid/cubes-stacked.svg" 
-            alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            COALRR WebGIS
-          </a>
-        </div>
-      </nav>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          COALRR Geographical Information System
+        </a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+          Search By Query
+        </button>
+      </div>
+    </nav>
 
-    <div class = "container" id = "boxes">
-        <!--<h1 style = "height:50px; text-align:middle">COALRR WebGIS</h1>-->
-         
-        <div id = "leftbox" style = "background-color: powderblue">
-                <!--<div class = "leaflet-control search">
-                    <input type="text" id="search" placeholder="Lat, Lng"><br>
-                    <button id="search-btn">Search</button>
-                </div>-->
-                <div id="layer-switcher" class="leaflet-control" style="width:50%; margin:0 auto">
-                    <input type="checkbox" id="osm" checked>
-                    <label for="osm">Open Street Map</label><br>
-                    <input type="checkbox" id="wmsLayers">
-                    <label for="wmsLayers">WMS layers</label><br>
-                    <input type="checkbox" id="wfsLayers">
-                    <label for="wfsLayers">WFS layers</label>
-                </div>
-        </div>
-         
-        <div id="map" style="background-color: powderblue">
-        </div>
-         
-        <div id="rightbox" style="background-color: powderblue">
-        </div>
+        <!--ATTRIBUTE QUERY MODAL-->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                      <h4 class="modal-title">SEARCH BY QUERY</h4>
+                      <button type="button" class="close" data-dismiss="modal"></button>
+                  </div>            
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                      <form id="myForm" action="" method="POST">
+                          <!-- <div class="headerDiv" id="headerDiv" style="background-color: #5dade2">
+                              <label for="">Attribute Query</label>
+                          </div> -->
+                          <div class="form-group">
+                              <label for="">Select Mouza</label><br>
+                              <select name="selectMouza" class="selectMouza" id="selectMouza">
+                                  <option value="selectMouza">Select Mouza</option>                            
+                              </select><br><br>
+                              <label for="">Select Mouza Attribute</label><br>
+                              <select name="selectAttribute" id="selectAttribute">
+                                  <option value="SelectAttribute">Select Attribute</option>
+                                  <option value="plot_number">Plot Number</option>
+                                  <option value="tot_area">Total Area</option>
+                                  <option value="area_acqrd">Acquired Area</option>
+                                  <option value="area_sanc">Sanctioned Area</option>
+                                  <option value="area_un_poss">Unused Area</option>
+                                  <option value="area_vac">Vacant Area</option>
+                                  <option value="khatian_no">Khatian Number</option>
+                                  <option value="area_possd">Possessed Area</option>
+                                  <option value="owner_name">Owner Name</option>
+                                  <option value="area_possd">Beneficiary Name</option>
+                              </select><br><br>
+                              <label for="">Select Query Operator</label><br>
+                              <select name="selectOperator" id="selectOperator">
+                                  <option value="SelectOperator">Select Operator</option>
+                                  <option value=">">></option>
+                                  <option value="<"><</option>
+                                  <option value="=">=</option>
+                              </select><br><br>
+                              <label for="">Enter Query Value</label><br>
+                              <input type="text" name="enterValue" id="enterValue" placeholder="Enter Value"><br><br>
+                              <!-- <button type="button" style="background-color: #1b4f72" id="attQryRun" class="attQryRun" onclick="attributeQuery()">Run Query</button><br><br> -->
+                          </div>
+                      </form>
+                  </div>                
+                  <!-- Modal Footer -->
+                  <div class="modal-footer">
+                      <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                      <button type="submit" class="attQryRun" form="QueryForm" style="background-color: #1b4f72" id="attQryRun" onclick="attributeQuery()">Run Query</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    <div class = "flex-parent-element" id = "boxes">
+      <!--<h1 style = "height:50px; text-align:middle">COALRR WebGIS</h1>-->
+       
+      <!-- <div id = "leftbox" style = "background-color: powderblue">
+      </div> -->
+       
+      <div class='flex-child-element' id="map" style="background-color: powderblue">
+      </div>
+       
+      <!-- <div id="rightbox" style="background-color: powderblue">
+      </div> -->
     </div>
 
     <!-- Coordinate DIV -->
     <div class = "coordinate" id = "coordinate"></div>
-
-    <!-- <button class="zoom-to-layer">ZoomToLayer</button> -->
-    <!--<button onclick=fullScreenView()>FullScreen</button>-->
-    <!-- <button class="print-map">Print Map</button> -->
 
     <!-- jQuery CDN -->
     <!-- <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> -->
@@ -89,13 +127,17 @@
     <script src = "https://code.jquery.com/jquery-3.6.4.js" integrity = "sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin = "anonymous"></script>
 
     <!-- JS file connections -->
-    <script src =https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js></script>
+    <script src = https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js></script>
     <script src = "leaflet.js"></script>
-    <script src=
+    <script src =
     "https://cdn.jsdelivr.net/npm/leaflet-wfst@2.0.1-beta.27/dist/leaflet-wfst.src.min.js">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <!--BOOTSTRAP JS-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
     
 </body>
 </html>
